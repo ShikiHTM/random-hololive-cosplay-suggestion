@@ -8,6 +8,10 @@ const holoList = new HololiveCosplayList();
 
 await holoList.init();
 
+app.get('/', (req, res) => {
+    res.redirect('/random');
+});
+
 app.get('/random', async(req, res) => {
     let talent = await holoList.randomTalentToCosplay();
     let talentPicture = await holoList.getTalentPicture(talent);
