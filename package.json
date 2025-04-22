@@ -4,7 +4,7 @@
     "main": "index.js",
     "scripts": {
       "dev": "nodemon --env-file=.\\src\\.env .\\src\\index.js",
-      "run": "nodejs --env-file=.\\src\\.env .\\src\\index.js"
+      "deploy": "node --env-file=.\\src\\.env .\\src\\index.js"
     },
     "keywords": [],
     "author": "",
