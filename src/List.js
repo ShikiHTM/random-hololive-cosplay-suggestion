@@ -6,20 +6,25 @@ export default class HololiveCosplayList {
     #list = new Map();
     #talentPicture = new Map();
 
+    async readFile() {
+        const data = await fs.readFile('./hololive_cosplay_list.json', 'utf8');
+        const pictureData = await fs.readFile('./hololive_picture.json', 'utf8');
+        this.#talentPicture = new Map(Object.entries(JSON.parse(pictureData)));
+        this.#list = new Map(Object.entries(JSON.parse(data)));
+    }
+
     async init() {
         try {
             await fs.access('hololive_cosplay_list.json');
             await fs.access('hololive_picture.json')
-            const data = await fs.readFile('./hololive_cosplay_list.json', 'utf8');
-            const pictureData = await fs.readFile('./hololive_picture.json', 'utf8');
-            this.#talentPicture = new Map(Object.entries(JSON.parse(pictureData)));
-            this.#list = new Map(Object.entries(JSON.parse(data)));
+            await this.readFile();
             console.log('hololive_cosplay_list.json read successfully!');
         } catch (err) {
             if (err.code === 'ENOENT') {
                 const list = await this.#generateList();
                 await fs.writeFile('hololive_cosplay_list.json', JSON.stringify(list, null, 2));
                 await fs.writeFile('hololive_picture.json', JSON.stringify(Object.fromEntries(this.#talentPicture), null, 2));
+                await this.readFile();
                 console.log('hololive_picture.json created successfully!');
                 console.log('hololive_cosplay_list.json created successfully!');
             } else {
@@ -89,6 +94,12 @@ export default class HololiveCosplayList {
     async isAllCosplayed() {
         let isAllCosplayed = Array.from(this.#list.values()).every(cosplayed => cosplayed === true)
 
+        if(isAllCosplayed) {
+            [...this.#list.keys()].forEach(talent => this.#list.set(talent, false));
+            if(!devMode.dev) await this.updateFile();
+            console.log("All talents have been cosplayed! Resetting the list.");
+        }
+
         return isAllCosplayed;
     }
 
@@ -97,7 +108,7 @@ export default class HololiveCosplayList {
 
         if(talentAvailable.length == 0) {
             console.log("All talents have been cosplayed!");
-            return 1;
+            return;
         }
 
         let randomIndex = Math.floor(Math.random() * talentAvailable.length);

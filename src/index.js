@@ -50,6 +50,7 @@ app.get('/random', async(req, res) => {
                 </head>
                 <body>
                     <h1>Now, you should cosplay as ${talent}!</h1>
+                    <h2>(Refresh if you've already cosplayed her, or if you don't want to)</h2>
                     <img src="${talentPicture}" alt="${talent}" />
                 </body>
             </html>
@@ -86,6 +87,7 @@ app.get('/random', async(req, res) => {
                 </head>
                 <body>
                     <h1>All talent has been cosplayed!</h1>
+                    <h2>Thanks for your hard work</h2>
                 </body>
             </html>
         `);
