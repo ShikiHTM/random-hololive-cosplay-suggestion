@@ -3,9 +3,9 @@
     "version": "1.0.0",
     "main": "src\\index.js",
     "scripts": {
-      "dev": "nodemon --env-file=.\\src\\.env .\\src\\index.js",
-      "deploy_local": "node --env-file=.\\src\\.env .\\src\\index.js",
-      "deploy": "node .\\src\\index.js"
+      "dev": "nodemon --env-file=src\\.env src\\index.js",
+      "deploy_local": "node --env-file=src\\.env .\\src\\index.js",
+      "deploy": "node src\\index.js"
     },
     "keywords": [],
     "author": "",
