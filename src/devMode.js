@@ -1,3 +1,3 @@
 export default class devMode {
-    static dev = false;
+    static dev = true;
 }
