@@ -94,11 +94,11 @@ export default class HololiveCosplayList {
     async isAllCosplayed() {
         let isAllCosplayed = Array.from(this.#list.values()).every(cosplayed => cosplayed === true)
 
-        //if(isAllCosplayed) {
-        //    [...this.#list.keys()].forEach(talent => this.#list.set(talent, false));
-        //    if(!devMode.dev) await this.updateFile();
-        //    console.log("All talents have been cosplayed! Resetting the list.");
-        //}
+        if(isAllCosplayed) {
+           [...this.#list.keys()].forEach(talent => this.#list.set(talent, false));
+           if(!devMode.dev) await this.updateFile();
+           console.log("All talents have been cosplayed! Resetting the list.");
+        }
 
         return isAllCosplayed;
     }
