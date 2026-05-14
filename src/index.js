@@ -12,13 +12,13 @@ app.get('/', (req, res) => {
     res.redirect('/random');
 });
 
-app.get('/random', async(req, res) => {
+app.get('/random', async (req, res) => {
     let talent = await holoList.randomTalentToCosplay();
     let talentPicture = await holoList.getTalentPicture(talent);
 
     let isAllCosplayed = await holoList.isAllCosplayed();
 
-    if(!isAllCosplayed) {
+    if (!isAllCosplayed) {
         res.send(`
             <html>
                 <head>
