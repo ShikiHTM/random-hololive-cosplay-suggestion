@@ -9,17 +9,17 @@ const holoList = new HololiveCosplayList();
 await holoList.init();
 
 app.get('/', (req, res) => {
-    res.redirect('/random');
+        res.redirect('/random');
 });
 
 app.get('/random', async (req, res) => {
-    let talent = await holoList.randomTalentToCosplay();
-    let talentPicture = await holoList.getTalentPicture(talent);
+        let talent = await holoList.randomTalentToCosplay();
+        let talentPicture = await holoList.getTalentPicture(talent);
 
-    let isAllCosplayed = await holoList.isAllCosplayed();
+        let isAllCosplayed = await holoList.isAllCosplayed();
 
-    if (!isAllCosplayed) {
-        res.send(`
+        if (!isAllCosplayed) {
+                res.send(`
             <html>
                 <head>
                     <title>Hololive Cosplay</title>
@@ -55,8 +55,8 @@ app.get('/random', async (req, res) => {
                 </body>
             </html>
         `);
-    } else {
-        res.send(`
+        } else {
+                res.send(`
                 <html>
                 <head>
                     <title>Hololive Cosplay</title>
@@ -91,11 +91,11 @@ app.get('/random', async (req, res) => {
                 </body>
             </html>
         `);
-    }
+        }
 })
 
 app.listen(port, () => {
-    console.log(`Server is running at http://localhost:${port}`);
-    console.log(`You can get a random Hololive talent to cosplay by visiting http://localhost:${port}/random`);
-    console.log("Pushing!")
+        console.log(`Server is running at http://localhost:${port}`);
+        console.log(`You can get a random Hololive talent to cosplay by visiting http://localhost:${port}/random`);
+        console.log("Test ")
 })
