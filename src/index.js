@@ -97,5 +97,5 @@ app.get('/random', async (req, res) => {
 app.listen(port, () => {
         console.log(`Server is running at http://localhost:${port}`);
         console.log(`You can get a random Hololive talent to cosplay by visiting http://localhost:${port}/random`);
-        console.log("Test ")
+        console.log("Test 2")
 })
